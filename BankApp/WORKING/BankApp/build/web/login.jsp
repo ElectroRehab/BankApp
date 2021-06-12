@@ -62,7 +62,7 @@
                 ResultSet rs = ps.executeQuery();
                 if(rs.next()){
                     // Go to user's info
-                    response.sendRedirect("index.html");
+                    response.sendRedirect("table.html");
                 }     
                 else{
                     // Incorrect Response
