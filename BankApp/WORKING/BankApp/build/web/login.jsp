@@ -31,8 +31,6 @@
         //Get parameters from login form
         String email = request.getParameter("email");    
         String pass = request.getParameter("passID");
-        System.out.println(email);
-        System.out.println(pass);
         if(email == "" || pass == ""){
             response.sendRedirect("error.html");
         }
@@ -61,8 +59,8 @@
                 // Iterate through database to set new fields
                 ResultSet rs = ps.executeQuery();
                 if(rs.next()){
-                    // Go to user's info
-                    response.sendRedirect("table.html");
+                    // Go to user's info and pass email to next page
+                    response.sendRedirect("checking.jsp?temp="+email);
                 }     
                 else{
                     // Incorrect Response

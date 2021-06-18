@@ -10,13 +10,13 @@ public class ReadTitles {
         this.p = p;
         // If-ElseIf-Else statements for SQL statements thorughout program.
         if(p == 1){
-            sqlAll = "fname";
+            sqlAll = "date";
         }
         else if(p == 2){
-            sqlAll = "email";
+            sqlAll = "info";
         }
         else if(p == 3){
-            sqlAll = "passID";
+            sqlAll = "amount";
         }
         else if(p == 4){
             sqlAll = "lastName";

@@ -3,13 +3,16 @@
 <%@page import="readfile.ReadTitles"%>
 <%@page import="readfile.ReadSQL"%>
 <%@page import="readfile.ReadFile"%>
+<%@page import ="java.sql.*"%>
+<%@page import ="java.time.LocalDateTime"%> 
+<%@page import ="java.time.format.DateTimeFormatter"%>
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - Brand</title>
+    <title>Checking Account</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Averia+Serif+Libre">
@@ -20,6 +23,10 @@
 </head>
 
 <body id="page-top" style="background: radial-gradient(black, var(--bs-blue) 50%, white);">
+    <%
+        int count = 0;
+        String email = request.getParameter("temp");
+    %>
     <div id="wrapper">
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
@@ -78,6 +85,7 @@
                                     <div class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
                                 </div>
                             </div>
+                            
                             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                                 <table class="table my-0" id="dataTable">
                                     <thead>
@@ -85,15 +93,60 @@
                                             <th>Date</th>
                                             <th>Description</th>
                                             <th>Amount</th>
+                                            <th>Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr></tr>
+                                        <%
+                                            double total = 0.00;
+                                            try{
+                                                java.util.Date date=new java.util.Date();
+                                                int sqlInt = 0;
+                                                // Create a new clean connection to database.          
+                                                ConnectDB dbc = new ConnectDB();
+                                                dbc.ConnectDB();
+                                                Connection con = dbc.getConnections();
+                                                // Create object
+                                                ReadSQL s = new ReadSQL();
+                                                // Create object
+                                                ReadTitles t = new ReadTitles();
+                                                // Create a Prepared Statement to run query from database.
+                                                sqlInt = 4;
+                                                s.ReadSQL(sqlInt);
+                                                PreparedStatement ps = con.prepareStatement(s.getSQLAll());
+                                                // Set Strings to locations in the database.
+                                                ps.setString(1,email);
+                                                // Iterate through database to set new fields
+                                                ResultSet rs = ps.executeQuery();
+                                                while(rs.next()){
+                                                    count++;
+                                                    t.ReadTitles(3);
+                                                    total = total + rs.getDouble(t.getSQLTitles());
+                                        %>
                                         <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="avatars/avatar5.jpeg">6/11/2021</td>
-                                            <td>Deposit</td>
-                                            <td>$4000.00</td>
+                                            <!--DATE-->
+                                            <%t.ReadTitles(1);%>
+                                            <td><%=rs.getString(t.getSQLTitles())%></td>
+                                            <!--DESCRIPTION-->
+                                            <%t.ReadTitles(2);%>
+                                            <td><%=rs.getString(t.getSQLTitles()) %></td>
+                                            <!--AMOUNT-->
+                                            <%t.ReadTitles(3);%>
+                                            <td>$ <%=rs.getDouble(t.getSQLTitles())%></td>
+                                            <!--TOTAL-->
+                                            <td>$ <%out.print(total);%></td>
+                                            
                                         </tr>
+                                        <%
+                                            }
+                                }
+                                catch(Exception e){
+                                    out.print(e.getMessage());%><br><%
+                                }
+                                finally{         
+                                }
+                                %>
                                     </tbody>
                                     <tfoot>
                                         <tr></tr>
@@ -102,16 +155,23 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6 align-self-center">
-                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
+                                    <%
+                                        if(count < 10){
+                                            %><p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to <%out.print(count);%> of <%out.print(count);%></p><%
+                                        }
+                                        else{
+                                            %><p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to <%out.print(count);%></p><%
+                                        }
+                                    %>
                                 </div>
                                 <div class="col-md-6">
                                     <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                                         <ul class="pagination">
-                                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">Â«</span></a></li>
+                                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
                                             <li class="page-item active"><a class="page-link" href="#">1</a></li>
                                             <li class="page-item"><a class="page-link" href="#">2</a></li>
                                             <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">Â»</span></a></li>
+                                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -122,7 +182,7 @@
             </div>
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Â© 2021 ElectroRehab</span></div>
+                    <div class="text-center my-auto copyright"><span>© 2021 ElectroRehab</span></div>
                 </div>
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
