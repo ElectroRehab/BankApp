@@ -59,6 +59,8 @@
                 // Iterate through database to set new fields
                 ResultSet rs = ps.executeQuery();
                 if(rs.next()){
+                    hashText.setHashText(email);
+                    email = hashText.getHashText();
                     // Go to user's info and pass email to next page
                     response.sendRedirect("checking.jsp?temp="+email);
                 }     

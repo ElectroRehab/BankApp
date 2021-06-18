@@ -28,7 +28,13 @@
     <body>
     <%
         int sqlInt = 0;
+        String newAcct = "New Account";
+        double newCurr = 0.00;
         HashSHA512Encryption hashText = new HashSHA512Encryption();
+        //Get Current date and time   
+        java.util.Date date=new java.util.Date();
+        // Date and Time Check 
+        Timestamp createTime =new java.sql.Timestamp(date.getTime());
         //Get parameters from login form
         String fName = request.getParameter("fname");
         String lName = request.getParameter("lname");
@@ -36,6 +42,7 @@
         String city = request.getParameter("city");
         String state = request.getParameter("state");
         String email = request.getParameter("email");    
+        String emailHash = email;
         String passID = request.getParameter("passID");
         if(email == "" || passID == ""){
             response.sendRedirect("error.html");
@@ -68,11 +75,17 @@
                     response.sendRedirect("exists.html");
                 }
                 else{
+                    hashText.setHashText(emailHash);
+                    emailHash = hashText.getHashText();
                     // Insert new user into bank database
                     sqlInt = 1;
                     s.ReadSQL(sqlInt);
                     // Add registration  
-                    st.executeUpdate(s.getSQLAll() + "('"+fName+"','"+lName+"','"+address+"','"+city+"','"+state+"','"+email+"','"+passID+"')");
+                    st.executeUpdate(s.getSQLAll() + "('"+fName+"','"+lName+"','"+address+"','"+city+"','"+state+"','"+email+"','"+emailHash+"','"+passID+"')");
+                    
+                    sqlInt = 5;
+                    s.ReadSQL(sqlInt);
+                    st.executeUpdate(s.getSQLAll() + "('"+emailHash+"','"+createTime+"','"+newAcct+"','"+newCurr+"')");
                     response.sendRedirect("congrats.html");
                 }
             }
