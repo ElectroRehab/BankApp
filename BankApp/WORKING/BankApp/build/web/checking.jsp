@@ -25,7 +25,55 @@
 <body id="page-top" style="background: radial-gradient(black, var(--bs-blue) 50%, white);">
     <%
         int count = 0;
+        int sqlInt = 0;
         String email = request.getParameter("temp");
+        String fName = "";
+        String lName = "";
+        String fullName = "";
+        
+        try{            
+                // Create a new clean connection to database.          
+                ConnectDB dbc = new ConnectDB();
+                dbc.ConnectDB();
+                Connection con = dbc.getConnections();
+                // Create object
+                ReadSQL s = new ReadSQL();
+                // Create object
+                ReadTitles t = new ReadTitles();
+                // Create a Prepared Statement to run query from database.
+                sqlInt = 6;
+                s.ReadSQL(sqlInt);
+                PreparedStatement ps = con.prepareStatement(s.getSQLAll());
+                // Set Strings to locations in the database.
+                ps.setString(1,email);
+                // Iterate through database to set new fields
+                ResultSet rs = ps.executeQuery();
+                if(rs.next()){
+                    // Get user's First Name
+                    sqlInt = 4;
+                    t.ReadTitles(sqlInt);
+                    fName = rs.getString(t.getSQLTitles());
+                    // Get user's Last Name
+                    sqlInt = 5;
+                    t.ReadTitles(sqlInt);
+                    lName = rs.getString(t.getSQLTitles());
+                    // Combine user's First and Last name
+                    fullName = fName + " " + lName;
+                }     
+                else{
+                    // Incorrect Response
+                    fullName = "ERROR";
+                }
+                // Close all recently opened connections. 
+                ps.close();
+                rs.close();
+                con.close();
+            }
+            catch(Exception e){     
+                out.println(e); 
+                // Incorrect Response
+                fullName = "ERROR";
+            }
     %>
     <div id="wrapper">
         <div class="d-flex flex-column" id="content-wrapper">
@@ -59,9 +107,9 @@
                             </li>
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small">Jon King</span><img class="border rounded-circle img-profile" src="avatars/avatar1.jpg"></a>
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small"><%out.print(fullName);%></span><img class="border rounded-circle img-profile" src="assets/img/avatars/user.jpg"></a>
                                     <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a><a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity log</a>
-                                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item" href="index.html"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
                                     </div>
                                 </div>
                             </li>
@@ -101,7 +149,6 @@
                                             double total = 0.00;
                                             try{
                                                 java.util.Date date=new java.util.Date();
-                                                int sqlInt = 0;
                                                 // Create a new clean connection to database.          
                                                 ConnectDB dbc = new ConnectDB();
                                                 dbc.ConnectDB();
@@ -133,8 +180,6 @@
                                             <!--AMOUNT-->
                                             <%t.ReadTitles(3);%>
                                             <td>$ <%=(String.format("%,10.2f", rs.getDouble(t.getSQLTitles())))%></td>
-                                            
-                                            <!--TOTAL-->
                                         </tr>
                                         
                                         <%
@@ -148,8 +193,9 @@
                                 %>
                                 <tr>
                                     <td></td>
-                                    <td class="text-end">TOTAL:</td>
-                                    <td>$ <%out.print(String.format("%,10.2f", total));%></td>
+                                    <!--TOTAL-->
+                                    <td class="text-end"><strong>TOTAL:</strong></td>
+                                    <td><strong>$ <%out.print(String.format("%,10.2f", total));%></strong></td>
                                     </tr>
                                     </tbody>
                                     <tfoot>

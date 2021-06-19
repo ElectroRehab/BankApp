@@ -19,10 +19,10 @@ public class ReadTitles {
             sqlAll = "amount";
         }
         else if(p == 4){
-            sqlAll = "lastName";
+            sqlAll = "firstname";
         }
         else if(p == 5){
-            sqlAll = "address";
+            sqlAll = "lastname";
         }
         else if(p == 6){
             sqlAll = "city";
