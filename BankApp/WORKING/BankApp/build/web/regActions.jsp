@@ -86,6 +86,7 @@
                     sqlInt = 5;
                     s.ReadSQL(sqlInt);
                     st.executeUpdate(s.getSQLAll() + "('"+emailHash+"','"+createTime+"','"+newAcct+"','"+newCurr+"')");
+                    
                     response.sendRedirect("congrats.html");
                 }
             }
