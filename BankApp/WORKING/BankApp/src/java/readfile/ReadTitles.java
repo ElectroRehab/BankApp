@@ -40,10 +40,10 @@ public class ReadTitles {
             sqlAll = "email";
         }
         else if(p == 11){
-            sqlAll = "pinNum";
+            sqlAll = "pass";
         }
         else if(p == 12){
-            sqlAll = "imageID";
+            sqlAll = "emailHash";
         }
         else if(p == 13){
             sqlAll = "identifier";
