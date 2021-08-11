@@ -135,6 +135,7 @@
                                     <table class="table my-0" id="dataTable">
                                         <thead>
                                             <tr>
+                                                <th style="color: rgb(0,0,0);font-size: 20px;font-weight: bold;font-style: italic;text-shadow: 1px 2px 3px rgb(255,163,77);">Remove</th>
                                                 <th style="color: rgb(0,0,0);font-size: 20px;font-weight: bold;font-style: italic;text-shadow: 1px 2px 3px rgb(255,163,77);">Date</th>
                                                 <th style="text-shadow: 1px 2px 3px rgb(255,163,77);color: rgb(0,0,0);font-size: 20px;font-weight: bold;font-style: italic;">Description</th>
                                                 <th style="text-shadow: 1px 2px 3px rgb(255,163,77);color: rgb(0,0,0);font-size: 20px;font-weight: bold;font-style: italic;">Amount</th>
@@ -169,6 +170,15 @@
                                                         total = total + rs.getDouble(t.getSQLTitles());
                                         %>
                                             <tr>
+                                                <!--REMOVE SECTION-->
+                                                <%t.ReadTitles(14);%>
+                                                
+                                                
+                                                <td style="color: rgb(255,255,255);font-weight: bold;text-shadow: 1px 2px 3px rgb(255,163,77);">
+                                                    <form action="updateItem.jsp<%out.print("?temp="+email);%>" method="post">
+                                                    <button class="btn btn-primary bg-primary bg-gradient border rounded-pill border-dark shadow-lg" data-bss-hover-animate="jello" type="submit" name="slot" value="<%=rs.getString(t.getSQLTitles())%>" style="padding-right: 5px;padding-left: 5px;width: 100px;text-shadow: 1px 2px 3px rgb(255,163,77);font-style: italic;">Remove</button>
+                                                    </form>
+                                                </td>
                                                 <!--DATE-->
                                                 <%t.ReadTitles(1);%>
                                                 <td style="color: rgb(255,255,255);font-weight: bold;text-shadow: 1px 2px 3px rgb(255,163,77);"><%=rs.getString(t.getSQLTitles())%></td>
