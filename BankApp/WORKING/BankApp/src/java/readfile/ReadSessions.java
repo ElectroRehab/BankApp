@@ -7,11 +7,11 @@ public class ReadSessions extends HttpServlet {
     public void getPost(HttpServletRequest request, HttpServletResponse response, HttpSession session){
         try{
             ReadTitles t = new ReadTitles();
-            t.ReadTitles(1);
+            t.ReadTitles(12);
             String uid = (String)session.getAttribute(t.getSQLTitles());
             if(uid == null){
                 //response.sendRedirect("javascript:history.go(-1)");
-                response.sendRedirect("notAdminAvailable.jsp");
+                response.sendRedirect("notUser.html");
             }
             else{
                 session.setAttribute(t.getSQLTitles(), uid);

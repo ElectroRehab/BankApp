@@ -61,6 +61,9 @@
                 if(rs.next()){
                     hashText.setHashText(email);
                     email = hashText.getHashText();
+                    t.ReadTitles(12);
+                    session.setAttribute(t.getSQLTitles().toString(), email);
+                    session.setMaxInactiveInterval(1*300);
                     // Go to user's info and pass email to next page
                     response.sendRedirect("budget.jsp?temp="+email);
                 }     
