@@ -124,12 +124,63 @@
                         <div class="row">
                             <div class="col-md-6" style="border-style: inset;">
                                 <form action="updateDep.jsp<%out.print("?temp="+email);%>" method="post">
-                                <div class="text-md-end d-xxl-flex justify-content-xxl-start dataTables_filter" id="dataTable_filter-3" style="width: 450px;margin-bottom: 0px;margin-left: 120px;"><label class="form-label d-xxl-flex justify-content-xxl-center align-items-xxl-center dataTables_info" role="status" aria-live="polite" style="color: rgb(0,0,0);font-weight: bold;font-style: italic;font-size: 20px;text-shadow: 1px 2px 3px rgb(255,163,77);margin-bottom: 0px;width: 225px;margin-left: 0px;">Amount&nbsp;</label><label class="form-label d-xxl-flex justify-content-xxl-center align-items-xxl-center dataTables_info" role="status" aria-live="polite" style="color: rgb(0,0,0);font-weight: bold;font-style: italic;font-size: 20px;text-shadow: 1px 2px 3px rgb(255,163,77);margin-bottom: 0px;width: 225px;margin-left: 0px;">Description:&nbsp;</label></div>
-                                <div class="text-md-end dataTables_filter" id="dataTable_filter" style="width: 575px;margin-bottom: 20px;"><label class="form-label dataTables_info" role="status" aria-live="polite" style="color: rgb(0,0,0);font-weight: bold;font-style: italic;font-size: 20px;text-shadow: 1px 2px 3px rgb(255,163,77);">Deposits: $</label><input type="text" name="depoCurrency" style="border-style: groove;padding-right: 2px;margin-right: 10px;"><input type="text" name="depoDescription" style="border-style: groove;padding-right: 2px;margin-right: 10px;"><button class="btn btn-primary bg-primary bg-gradient border rounded-pill border-dark shadow-lg" data-bss-hover-animate="jello" type="submit" style="padding-right: 5px;padding-left: 5px;width: 100px;text-shadow: 1px 2px 3px rgb(255,163,77);font-style: italic;">Deposit</button></div>
+                                    <div class="text-md-end d-xxl-flex justify-content-xxl-start dataTables_filter" id="dataTable_filter-3" style="width: 450px;margin-bottom: 0px;margin-left: 120px;">
+                                        <label class="form-label d-xxl-flex justify-content-xxl-center align-items-xxl-center dataTables_info" role="status" aria-live="polite" style="color: rgb(0,0,0);font-weight: bold;font-style: italic;font-size: 20px;text-shadow: 1px 2px 3px rgb(255,163,77);margin-bottom: 0px;width: 225px;margin-left: 0px;">Amount&nbsp;</label>
+                                        <label class="form-label d-xxl-flex justify-content-xxl-center align-items-xxl-center dataTables_info" role="status" aria-live="polite" style="color: rgb(0,0,0);font-weight: bold;font-style: italic;font-size: 20px;text-shadow: 1px 2px 3px rgb(255,163,77);margin-bottom: 0px;width: 225px;margin-left: 0px;">Description:&nbsp;</label>
+                                    </div>
+                                    <div class="text-md-end dataTables_filter" id="dataTable_filter" style="width: 575px;margin-bottom: 20px;">
+                                        <label class="form-label dataTables_info" role="status" aria-live="polite" style="color: rgb(0,0,0);font-weight: bold;font-style: italic;font-size: 20px;text-shadow: 1px 2px 3px rgb(255,163,77);">Deposit: $</label>
+                                        <input type="text" name="depoCurrency" style="border-style: groove;padding-right: 2px;margin-right: 10px;">
+                                        <select type="text" name="depoDescription" style="border-style: groove;padding-right: 2px;margin-right: 10px;width: 215px;height: 30px">
+                                            <option value="Wages">Wages</option>
+                                            <option value="Salary">Salary</option>
+                                            <option value="Commission">Commission</option>
+                                            <option value="Interest">Interest</option>
+                                            <option value="Investments">Investments</option>
+                                            <option value="Allowance">Allowance</option>
+                                            <option value="Government Payments">Government Payments</option>
+                                            <option value="Sold Item">Sold Item</option>
+                                            <option value="Child Support Received">Child Support Received</option>
+                                            <option value="Alimony Payments Received">Alimony Payments Received</option>
+                                        </select>
+                                        <button class="btn btn-primary bg-primary bg-gradient border rounded-pill border-dark shadow-lg" data-bss-hover-animate="jello" type="submit" style="padding-right: 5px;padding-left: 5px;width: 100px;text-shadow: 1px 2px 3px rgb(255,163,77);font-style: italic;">Deposit</button>
+                                    </div>
                                 </form>
                                 <form action="updateWit.jsp<%out.print("?temp="+email);%>" method="post">
-                                <div class="text-md-end d-xxl-flex justify-content-xxl-start dataTables_filter" id="dataTable_filter-4" style="width: 450px;margin-bottom: 0px;margin-left: 120px;"><label class="form-label d-xxl-flex justify-content-xxl-center align-items-xxl-center dataTables_info" role="status" aria-live="polite" style="color: rgb(0,0,0);font-weight: bold;font-style: italic;font-size: 20px;text-shadow: 1px 2px 3px rgb(255,163,77);margin-bottom: 0px;width: 225px;margin-left: 0px;">Amount&nbsp;</label><label class="form-label d-xxl-flex justify-content-xxl-center align-items-xxl-center dataTables_info" role="status" aria-live="polite" style="color: rgb(0,0,0);font-weight: bold;font-style: italic;font-size: 20px;text-shadow: 1px 2px 3px rgb(255,163,77);margin-bottom: 0px;width: 225px;margin-left: 0px;">Description:&nbsp;</label></div>
-                                <div class="text-md-end dataTables_filter" id="dataTable_filter-1" style="width: 575px;margin-bottom: 20px;"><label class="form-label dataTables_info" role="status" aria-live="polite" style="color: rgb(0,0,0);font-weight: bold;font-style: italic;font-size: 20px;text-shadow: 1px 2px 3px rgb(255,163,77);">Bills: $</label><input type="text" name="withCurrency" style="border-style: groove;padding-right: 2px;margin-right: 10px;"><input type="text" name="withDescription" style="border-style: groove;padding-right: 2px;margin-right: 10px;"><button class="btn btn-primary bg-primary bg-gradient border rounded-pill border-dark shadow-lg" data-bss-hover-animate="jello" type="submit" style="padding-right: 5px;padding-left: 5px;width: 100px;text-shadow: 1px 2px 3px rgb(255,163,77);font-style: italic;">Withdraw</button></div>
+                                    <div class="text-md-end d-xxl-flex justify-content-xxl-start dataTables_filter" id="dataTable_filter-4" style="width: 450px;margin-bottom: 0px;margin-left: 120px;">
+                                        <label class="form-label d-xxl-flex justify-content-xxl-center align-items-xxl-center dataTables_info" role="status" aria-live="polite" style="color: rgb(0,0,0);font-weight: bold;font-style: italic;font-size: 20px;text-shadow: 1px 2px 3px rgb(255,163,77);margin-bottom: 0px;width: 225px;margin-left: 0px;">Amount&nbsp;</label>
+                                        <label class="form-label d-xxl-flex justify-content-xxl-center align-items-xxl-center dataTables_info" role="status" aria-live="polite" style="color: rgb(0,0,0);font-weight: bold;font-style: italic;font-size: 20px;text-shadow: 1px 2px 3px rgb(255,163,77);margin-bottom: 0px;width: 225px;margin-left: 0px;">Description:&nbsp;</label>
+                                    </div>
+                                <div class="text-md-end dataTables_filter" id="dataTable_filter-1" style="width: 575px;margin-bottom: 20px;">
+                                    <label class="form-label dataTables_info" role="status" aria-live="polite" style="color: rgb(0,0,0);font-weight: bold;font-style: italic;font-size: 20px;text-shadow: 1px 2px 3px rgb(255,163,77);">Bills: $</label>
+                                    <input type="text" name="withCurrency" style="border-style: groove;padding-right: 2px;margin-right: 10px;">
+                                    <select type="text" name="withDescription" style="border-style: groove;padding-right: 2px;margin-right: 10px;width: 225px;height: 30px">
+                                        <option value="Mortgage">Mortgage</option>
+                                        <option value="Rent">Rent</option>
+                                        <option value="Homeowners Insurance">Homeowners Insurance</option>
+                                        <option value="Property Tax">Property Tax</option>
+                                        <option value="Auto Insurance">Auto insurance</option>
+                                        <option value="Health Insurance">Health Insurance</option>
+                                        <option value="Out-of-pocket Medical Costs">Out-of-pocket Medical Costs</option>
+                                        <option value="Life insurance">Life Insurance</option>
+                                        <option value="Electric Bill">Electric Bill</option>
+                                        <option value="Gas Bill">Gas Bill</option>
+                                        <option value="Water Bill">Water Bill</option>
+                                        <option value="Sanitation Bill">Sanitation Bill</option>
+                                        <option value="Groceries">Groceries</option>
+                                        <option value="Car Payment">Car Payment</option>
+                                        <option value="Gasoline">Gasoline</option>
+                                        <option value="Public Transportation">Public Transportation</option>
+                                        <option value="Internet">Internet</option>
+                                        <option value="Cell Phone">Cell Phone</option>
+                                        <option value="Student Loan Payment">Student Loan Payments</option>
+                                        <option value="Loan Payment">Loan Payment</option>
+                                        <option value="Child Support">Child Support</option>
+                                        <option value="Alimony Payments">Alimony Payments</option>
+                                        <option value="Child Care">Child Care</option>
+                                    </select>
+                                    <button class="btn btn-primary bg-primary bg-gradient border rounded-pill border-dark shadow-lg" data-bss-hover-animate="jello" type="submit" style="padding-right: 5px;padding-left: 5px;width: 100px;text-shadow: 1px 2px 3px rgb(255,163,77);font-style: italic;">Withdraw</button>
+                                </div>
                                 </form>
                             </div>
                             <div class="col" style="font-weight: bold;border-style: inset;">
